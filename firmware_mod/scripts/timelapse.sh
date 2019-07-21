@@ -52,6 +52,7 @@ while true; do
             break
         fi
     fi
+	counter=$(($counter + 1))
 done
 
 # loop completed so let's purge pid file
@@ -59,4 +60,4 @@ rm "$PIDFILE"
 
 cd /system/sdcard/DCIM/timelapse/$(date +%Y-%m-%d)
 /system/sdcard/bin/avconv -y -r 30 -f image2 -i img%03d.jpg  $(date +%Y-%m-%d_%H%M%S).mov
-rm *.jpg
+#rm *.jpg
