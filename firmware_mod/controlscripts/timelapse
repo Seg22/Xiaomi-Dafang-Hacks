@@ -23,9 +23,25 @@ stop()
   PID=$(cat $PIDFILE)
   kill -9 $PID
   rm $PIDFILE
-  cd /system/sdcard/DCIM/timelapse/$(date +%Y-%m-%d)
-  /system/sdcard/bin/avconv -y -r 30 -f image2 -i img%03d.jpg  $(date +%Y-%m-%d_%H%M%S).mov
-  #rm *.jpg
+  
+cd /system/sdcard/DCIM/timelapse/$(date +%Y-%m-%d)
+
+find . -type f -size -55000c -iname '*.jpg' > tmp1.txt
+grep -o "[0-9]*" tmp1.txt > tmp2.txt
+
+counter=1
+Zeilen=$(cat tmp2.txt | wc -l)
+
+while [ $counter -le $Zeilen ]; do
+	X=$(sed -n $(($counter))p tmp2.txt)
+	cp img$(($X+1)).jpg img$X.jpg
+	counter=$(($counter + 1))
+	done
+rm tmp1.txt
+rm tmp2.txt
+
+/system/sdcard/bin/avconv -y -r 30 -f image2 -i img%05d.jpg  $(date +%Y-%m-%d_%H%M%S).mov
+#rm *.jpg
 }
 
 if [ $# -eq 0 ]; then
