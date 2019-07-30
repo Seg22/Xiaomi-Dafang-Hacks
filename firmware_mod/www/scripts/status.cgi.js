@@ -152,7 +152,8 @@ $(document).ready(function() {
     b.prop('disabled', !b.prop('disabled'));
     var formData = {
       'tlinterval': $('input[name=tlinterval]').val(),
-      'tlduration': $('input[name=tlduration]').val()
+      'tlduration': $('input[name=tlduration]').val(),
+	  'tllength': $('input[name=tllength]').val()
     };
     $.ajax({
       type: 'POST',
