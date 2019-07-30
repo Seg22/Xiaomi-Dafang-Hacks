@@ -325,6 +325,7 @@ cat << EOF
                     <div class="control">
                         <input class="input" id="tlinterval" name="tlinterval" type="text" size="5" value="$(source /system/sdcard/config/timelapse.conf && echo "$TIMELAPSE_INTERVAL")"/> seconds
                     </div>
+                    <p class="help">This will also be the minimum interval if a timelapse length was set</p>
                 </div>
             </div>
         </div>
@@ -337,8 +338,22 @@ cat << EOF
                     <div class="control">
                         <input class="input" id="tlduration" name="tlduration" type="text" size="5" value="$(source /system/sdcard/config/timelapse.conf && echo "$TIMELAPSE_DURATION")"/> minutes
                     </div>
-                    <p class="help">Set to 0 for unlimited</p>
-                    <p class="help">These settings configure the timelapse mode. Start the timelapse on the Services page.</p>
+                    <p class="help">Set to 0 for unlimited, this will deactivate the set timelapse length</p>
+                </div>
+            </div>
+        </div>
+		<div class="field is-horizontal">
+            <div class="field-label is-normal">
+                <label class="label">Length</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <div class="control">
+                        <input class="input" id="tllength" name="tllength" type="text" size="5" value="$(source /system/sdcard/config/timelapse.conf && echo "$TIMELAPSE_LENGTH")"/> seconds
+                    </div>
+					<p class="help">Set to 0 to use set interval</p>
+					<p class="help">Determins the timelapse intervale depending on the set timelapse length</p>
+					<p class="help">These settings configure the timelapse mode. Start the timelapse on the Services page.</p>
                 </div>
             </div>
         </div>
