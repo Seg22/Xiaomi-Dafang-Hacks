@@ -461,6 +461,14 @@ if [ -n "$F_cmd" ]; then
       else
         echo "Invalid timelapse duration"
       fi
+	  tllength=$(printf '%b' "${F_tllength/%/\\x}")
+      tllength=$(echo "$tllength" | sed "s/[^0-9\.]//g")
+      if [ "$tllength" ]; then
+        rewrite_config /system/sdcard/config/timelapse.conf TIMELAPSE_LENGTH "$tllength"
+        echo "Timelapse length set to $tllength seconds."
+      else
+        echo "Invalid timelapse length"
+      fi
       return
     ;;
 
